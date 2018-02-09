@@ -1,0 +1,11 @@
+.DS_Store
+.svn
+.cvs
+.htaccess
+.vagrant
+*.bak
+*.swp
+*.xml
+Thumbs.db
+
+/node_modules/

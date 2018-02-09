@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Karla|Prociono');
+
+body,
+html {
+  margin: 0;
+  height: 100%;
+}
+
+.container {
+  box-sizing: border-box;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  padding: 40px;
+  position: relative;
+  height: 100%;
+  width: 50%;
+}
+
+h1 {
+  font-family: 'Prociono', serif;
+  font-weight: 400;
+  margin: 0;
+}
+
+p {
+  font-family: 'Karla', sans-serif;
+}
+
+canvas {
+  left: 0;
+  position: fixed;
+  height: 100%;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+footer {
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out, text-decoration 0.3s ease-in-out;
+
+    &:hover {
+      color: #e23860;
+      text-decoration-skip: ink;
+      text-decoration: underline;
+    }
+  }
+
+  position: absolute;
+  bottom: 30px;
+}

@@ -1,0 +1,28 @@
+{
+  "name": "additions",
+  "description": "The npm package list for additions",
+  "scripts": {
+    "dev": "rollup -w -c rollup.config.js",
+    "prod": "rollup -w -c rollup.config.js --environment BUILD:production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/additionsdigital/additionsdigital.github.io.git"
+  },
+  "author": "Ross Luebe",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@tweenjs/tween.js": "^17.2.0",
+    "autoprefixer": "^6.5.1",
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "postcss-nested": "^3.0.0",
+    "rollup": "^0.55.3",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-commonjs": "^8.3.0",
+    "rollup-plugin-node-resolve": "^3.0.2",
+    "rollup-plugin-postcss": "^1.2.8",
+    "rollup-plugin-uglify": "^3.0.0",
+    "three": "^0.89.0"
+  }
+}
