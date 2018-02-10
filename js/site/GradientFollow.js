@@ -237,8 +237,8 @@ class GradientFollow {
     this.mouseLightSky.color.setHSL(this.mouse.x / 14 + 0.01, 0.8, 0.5);
     this.mouseLightGround.color.setHSL(this.mouse.y / 10 + 0.55, 0.8, 0.5);
 
-    this.mouseLightSky.intensity = -(this.mouse.y / 5 - (1 / 5));
-    this.mouseLightGround.intensity = this.mouse.y / 5;
+    this.mouseLightSky.intensity = -(this.mouse.y / 10 - (1 / 10));
+    this.mouseLightGround.intensity = this.mouse.y / 10;
 
   }
 
