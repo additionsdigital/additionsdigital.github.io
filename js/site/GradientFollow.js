@@ -86,7 +86,6 @@ class GradientFollow {
     this.scene.add(this.hemisphere);
 
     this.mouseLightSky = new THREE.SpotLight(0x00ffe1, 0.5, window.innerHeight / 3, 1, 1);
-    this.mouseLightSky.position.set(0, 0, 1000);
 
     this.scene.add(this.mouseLightSky);
 
