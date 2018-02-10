@@ -10,6 +10,7 @@ class GradientFollow {
 
     this.mouse = new THREE.Vector2();
     this.scene;
+    this.aspect;
     this.camera;
     this.renderer;
     this.mesh;
@@ -20,6 +21,7 @@ class GradientFollow {
     this.previousColor;
     this.previousGroundColor;
     this.tweening = false;
+    this.orientationScale;
 
     this.build();
 
@@ -28,12 +30,7 @@ class GradientFollow {
     window.addEventListener('deviceorientation', (e) => this.onDeviceMove(e), false);
 
     window.addEventListener('resize', () => {
-      window.requestAnimationFrame(() => this.onWindowResize());
-    }, false);
-
-    window.addEventListener('orientationchange', () => {
-      this.destroy();
-      this.build();
+      window.requestAnimationFrame(() => this.onResizeScene());
     }, false);
 
     document.body.addEventListener('mouseenter', (e) => this.tweenValues(e), false);
@@ -56,10 +53,9 @@ class GradientFollow {
 
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(0xffffff);
-    const aspect = window.innerWidth / window.innerHeight;
-    this.camera = new THREE.PerspectiveCamera(45, aspect, 1, 10000);
-
-    // this.camera.position.z = window.innerHeight * 3; // zoom out testing
+    this.aspect = window.innerWidth / window.innerHeight;
+    this.orientationScale = Math.floor(this.aspect);
+    this.camera = new THREE.PerspectiveCamera(45, this.aspect, 1, 10000);
     this.camera.position.z = window.innerHeight;
 
   }
@@ -97,12 +93,6 @@ class GradientFollow {
     this.mouseLightGround = new THREE.SpotLight(0x00ffe1, 0.5, window.innerHeight / 3, 1, 1);
 
     this.scene.add(this.mouseLightGround);
-
-  }
-
-  destroy() {
-
-    document.body.removeChild(this.renderer.domElement);
 
   }
 
@@ -148,13 +138,15 @@ class GradientFollow {
 
   }
 
-  onWindowResize() {
+  onResizeScene() {
+
+    if (this.orientationScale !== Math.floor(window.innerWidth / window.innerHeight)) {
+      return this.rebuild();
+    }
 
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
-
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-
     this.render();
 
   }
@@ -170,6 +162,14 @@ class GradientFollow {
     this.hemisphere.color.setHSL(this.mouse.x / 14 + 0.01, 0.9, 0.5);
 
     this.hemisphere.groundColor.setHSL(this.mouse.y / 10 + 0.55, 0.9, 0.5);
+
+  }
+
+  rebuild() {
+
+    document.body.appendChild(this.renderer.domElement);
+
+    this.build();
 
   }
 
