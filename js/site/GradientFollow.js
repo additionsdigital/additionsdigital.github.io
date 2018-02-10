@@ -111,12 +111,12 @@ class GradientFollow {
 
     const config = {
       gamma: {
-        min: -30,
-        max: 30
+        min: -25,
+        max: 25
       },
       beta: {
         min: 30,
-        max: 75
+        max: 65
       }
     }
 
@@ -128,7 +128,7 @@ class GradientFollow {
       this.mouse.x = 1;
     }
 
-    this.mouse.y = (event.beta - 30) / 45;
+    this.mouse.y = (event.beta - config.beta.min) / (config.beta.max - config.beta.min);
 
     if (this.mouse.y < 0) {
       this.mouse.y = 0;
