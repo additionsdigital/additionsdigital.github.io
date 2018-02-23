@@ -166,7 +166,7 @@ class GradientFollow {
 
   rebuild() {
 
-    document.body.appendChild(this.renderer.domElement);
+    document.body.removeChild(this.renderer.domElement);
 
     this.build();
 
