@@ -10,7 +10,7 @@ export default {
   input: 'js/main.js',
   output: {
     file: 'assets/js/js.js',
-    format: 'iife'
+    format: 'iife',
   },
   sourcemaps: true,
   plugins: [
@@ -21,22 +21,26 @@ export default {
         nested(),
         autoprefixer({
           browsers: ['last 1 version']
-        })
-      ]
+        }),
+      ],
     }),
     babel({
       presets: [
         [
-          'es2015', {
-            modules: false
-          }
-        ]
+          'env',
+          {
+            modules: false,
+          },
+        ],
+      ],
+      plugins: [
+        'external-helpers',
       ],
       babelrc: false,
-      exclude: 'node_modules/**'
+      exclude: 'node_modules/**',
     }),
     resolve(),
     (process.env.BUILD === 'production' && uglify()),
-    commonjs()
-  ]
+    commonjs(),
+  ],
 }

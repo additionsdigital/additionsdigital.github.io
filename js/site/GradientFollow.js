@@ -2,6 +2,7 @@
  * GradientFollow.js
  */
 import * as THREE from 'three';
+import OrbitControls from 'orbit-controls-es6';
 import TWEEN from '@tweenjs/tween.js';
 
 class GradientFollow {
@@ -12,6 +13,7 @@ class GradientFollow {
     this.scene;
     this.aspect;
     this.camera;
+    this.controls;
     this.renderer;
     this.mesh;
     this.hemisphere;
@@ -20,6 +22,7 @@ class GradientFollow {
     this.iteration = 0;
     this.previousColor;
     this.previousGroundColor;
+    this.scrollStarted = false;
     this.tweening = false;
     this.orientationScale;
 
@@ -41,11 +44,26 @@ class GradientFollow {
 
     this.buildScene();
 
+    this.addMouseControls();
+
     this.colorShape();
 
     this.buildRenderer();
 
     this.animate();
+
+  }
+
+  addMouseControls() {
+
+    this.controls = new OrbitControls(this.camera);
+
+    this.controls.enableKeys = false;
+    this.controls.enablePan = false;
+    this.controls.enableRotate = false;
+
+    this.controls.maxDistance = 9999;
+    this.controls.minDistance = this.camera.position.z;
 
   }
 
@@ -147,6 +165,16 @@ class GradientFollow {
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.render();
+
+  }
+
+  onScroll() {
+
+    this.scrollStarted = true;
+
+    this.controls.dispose();
+
+    console.log('scroll started');
 
   }
 
@@ -253,6 +281,10 @@ class GradientFollow {
     }
 
     this.mouseLightControl();
+
+    if (this.camera.position.z > this.controls.minDistance && !this.scrollStarted) {
+      this.onScroll();
+    }
 
     this.render();
 
